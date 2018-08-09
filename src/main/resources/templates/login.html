@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--head部分-->
 <head th:include="layout :: htmlhead" th:with="title='后台管理'">
+    <link rel="stylesheet" href="../static/css/login.css" />
+    <link rel="stylesheet" href="../static/layui/css/layui.css"/>
 </head>
 <body style="width: 100%;height:auto;background: lightskyblue no-repeat;background-size: 100%;">
 <div class="layui-container" style="height: 100%">
@@ -23,7 +25,7 @@
                         <label class="layui-form-label">用户名</label>
                         <div class="layui-input-inline">
                             <input id="username" name="username" lay-verify="required" autocomplete="off"
-                                   class="layui-input" type="tel"/>
+                                   class="layui-input" />
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -37,8 +39,7 @@
                         <label class="layui-form-label">手机号</label>
                         <div class="layui-input-inline">
                             <input id="mobile" name="mobile" lay-verify="required" autocomplete="off"
-                                   class="layui-input" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')"
-                                   onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+                                   class="layui-input" type="phone"/>
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -83,7 +84,11 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.serializejson.min.js"></script>
+<script src="/layui/layui.js"></script>
+<script src="/js/checkParam.js"></script>
+<script src="/js/common.js"></script>
 <script type="text/javascript" src="/js/login.js"></script>
 <script type="text/javascript" src="/js/validate.js"></script>
 </body>

@@ -514,6 +514,8 @@ p + p {
         width: 100%;
     }
 }
+
+
 @media (min-width: 34.375em) {
     .grid-u-md-1-5 {
         width: 20%;
