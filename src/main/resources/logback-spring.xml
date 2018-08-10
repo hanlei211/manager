@@ -149,5 +149,5 @@
     </root>
     <logger name="org.springframework" level="INFO"/>
     <logger name="druid.sql.Statement" level="DEBUG"/>
-    <logger name="com.hlc.sell.mapper" level="TRACE"/>
+    <logger name="com.hlc.manager.mapper" level="TRACE"/>
 </configuration>

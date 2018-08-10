@@ -85,7 +85,7 @@ public class ShiroConfig {
         // 指定要求登录时的链接
         shiroFilterFactoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/index");
+        shiroFilterFactoryBean.setSuccessUrl("/home");
         // 未授权时跳转的界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/error");
         // filterChainDefinitions拦截器=map必须用：LinkedHashMap，因为它必须保证有序
@@ -98,9 +98,10 @@ public class ShiroConfig {
         // // 配置不会被拦截的链接 从上向下顺序判断
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/static/*", "anon");
-
+        filterChainDefinitionMap.put("/home", "anon");
         // // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问【放行】-->
         filterChainDefinitionMap.put("/*", "authc");
+//        filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean
                 .setFilterChainDefinitionMap(filterChainDefinitionMap);

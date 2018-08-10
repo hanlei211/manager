@@ -106,15 +106,15 @@ function login(){
     var flag=checkParams();
     if(flag!=false){
         //校验短信验证码
-        var smsCode=$("#smsCode").val();
-        if("ok"!=ValidateUtils.checkCode(smsCode)){
-            //tips层-右
-            layer.tips(ValidateUtils.checkCode(smsCode), '#smsCode', {
-                tips: [3, '#78BA32'], //还可配置颜色
-                tipsMore: true
-            });
-            return false;
-        }
+        // var smsCode=$("#smsCode").val();
+        // if("ok"!=ValidateUtils.checkCode(smsCode)){
+        //     //tips层-右
+        //     layer.tips(ValidateUtils.checkCode(smsCode), '#smsCode', {
+        //         tips: [3, '#78BA32'], //还可配置颜色
+        //         tipsMore: true
+        //     });
+        //     return false;
+        // }
         $.post("/user/login",$("#useLogin").serialize(),function(data){
             console.log("data:"+data)
             if(data.code=="1000"){

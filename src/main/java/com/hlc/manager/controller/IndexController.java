@@ -19,7 +19,7 @@ public class IndexController {
     @GetMapping("/index")
     @ResponseBody
     private ModelAndView index(){
-        return new ModelAndView("index");
+        return new ModelAndView("login");
     }
 
     @GetMapping("/login")
