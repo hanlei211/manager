@@ -16,10 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping
 public class IndexController {
 
-    @GetMapping("/index")
-    @ResponseBody
+    @RequestMapping("/home")
     private ModelAndView index(){
-        return new ModelAndView("login");
+        return new ModelAndView("home");
     }
 
     @GetMapping("/login")

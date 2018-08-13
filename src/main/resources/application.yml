@@ -14,6 +14,9 @@ spring:
   # springboot 之静态资源路径配置
   mvc:
     static-path-pattern: /**
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
   resources:
     static-locations: classpath:/static/
     chain:
