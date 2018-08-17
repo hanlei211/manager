@@ -1,148 +1,166 @@
 package com.hlc.manager.entity;
 
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.util.Date;
+import java.util.List;
 
-public class User implements Serializable {
-	private static final long serialVersionUID = -3096736268081409238L;
-	private Integer id;
+/**
+ * 用户表
+ */
+@TableName("sys_user")
+public class User {
+    @TableId
+    private Integer userId;  // 主键id
 
-	private String username;
+    private String username;  // 账号
 
-	private String mobile;
+    private String password;  // 密码
 
-	private String email;
+    private String nickName;  // 昵称
 
-	private String password;
+    private String avatar;  // 头像
 
-	private Integer insertUid;
+    private String sex;  // 性别
 
-	private Date insertTime;
+    private String phone;  // 手机号
 
-	private Date updateTime;
+    private String email;  // 邮箱
 
-	private Boolean isDel;
+    private Integer emailVerified;  // 邮箱是否验证
 
-	private Boolean isJob;
+    private Integer personId;  // 人员id，关联person表，如果是教学系统，则关联学生表和教师表
 
-	private String mcode;
+    private Integer personType;  // 人员类型，比如：0学生，1教师
 
-	private Date sendTime;
+    private Integer state;  // 用户状态，0正常，1锁定
 
-	private Integer version;
+    private Date createTime;  // 注册时间
 
-	public Integer getId() {
-		return id;
-	}
+    private Date updateTime;  // 修改时间
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @TableField(exist = false)
+    private List<Role> roles;  //角色
 
-	public String getUsername() {
-		return username;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public void setUsername(String username) {
-		this.username = username == null ? null : username.trim();
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public String getMobile() {
-		return mobile;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile == null ? null : mobile.trim();
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setEmail(String email) {
-		this.email = email == null ? null : email.trim();
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getNickName() {
+        return nickName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password == null ? null : password.trim();
-	}
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
-	public Integer getInsertUid() {
-		return insertUid;
-	}
+    public String getAvatar() {
+        return avatar;
+    }
 
-	public void setInsertUid(Integer insertUid) {
-		this.insertUid = insertUid;
-	}
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
-	public Date getInsertTime() {
-		return insertTime;
-	}
+    public String getSex() {
+        return sex;
+    }
 
-	public void setInsertTime(Date insertTime) {
-		this.insertTime = insertTime;
-	}
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
-	public Date getUpdateTime() {
-		return updateTime;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public Boolean getIsDel() {
-		return isDel;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setIsDel(Boolean isDel) {
-		this.isDel = isDel;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public Boolean getIsJob() {
-		return isJob;
-	}
+    public Integer getEmailVerified() {
+        return emailVerified;
+    }
 
-	public void setIsJob(Boolean isJob) {
-		this.isJob = isJob;
-	}
+    public void setEmailVerified(Integer emailVerified) {
+        this.emailVerified = emailVerified;
+    }
 
-	public String getMcode() {
-		return mcode;
-	}
+    public Integer getPersonId() {
+        return personId;
+    }
 
-	public void setMcode(String mcode) {
-		this.mcode = mcode;
-	}
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
+    }
 
-	public Date getSendTime() {
-		return sendTime;
-	}
+    public Integer getPersonType() {
+        return personType;
+    }
 
-	public void setSendTime(Date sendTime) {
-		this.sendTime = sendTime;
-	}
+    public void setPersonType(Integer personType) {
+        this.personType = personType;
+    }
 
-	public Integer getVersion() {
-		return version;
-	}
+    public Integer getState() {
+        return state;
+    }
 
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", mobile="
-				+ mobile + ", email=" + email + ", password=" + password
-				+ ", insertUid=" + insertUid + ", insertTime=" + insertTime
-				+ ", updateTime=" + updateTime + ", isDel=" + isDel
-				+ ", isJob=" + isJob + ", mcode=" + mcode + ", sendTime="
-				+ sendTime + ", version=" + version + "]";
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 }

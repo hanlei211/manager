@@ -2,11 +2,7 @@ package com.hlc.manager.shiro;
 
 import com.hlc.manager.entity.User;
 import com.hlc.manager.service.UserService;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -67,11 +63,14 @@ public class ShiroRealm extends AuthorizingRealm {
         User user = userService.findUserByName(name);
         if (user == null) {
             //这里返回后会报出对应异常
-            return null;
-        } else {
-            //这里验证authenticationToken和simpleAuthenticationInfo的信息
-            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(name, user.getPassword(), getName());
-            return simpleAuthenticationInfo;
+            throw new UnknownAccountException(); // 账号不存在
         }
+
+        if (user.getState() != 0) {
+            throw new LockedAccountException();  // 账号被锁定
+        }
+        //这里验证authenticationToken和simpleAuthenticationInfo的信息
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(name, user.getPassword(), getName());
+        return simpleAuthenticationInfo;
     }
 }
