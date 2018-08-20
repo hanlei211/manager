@@ -2,6 +2,8 @@ package com.hlc.manager.service;
 
 import com.hlc.manager.entity.User;
 
+import java.util.List;
+
 /**
  * @Author rjyx
  * @Description
@@ -17,4 +19,6 @@ public interface UserService {
     int updateByPrimaryKey(User record);
 
     User findUserByName(String name);
+
+    List<User> getUsers();
 }

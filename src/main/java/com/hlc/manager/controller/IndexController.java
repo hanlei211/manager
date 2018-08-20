@@ -1,5 +1,6 @@
 package com.hlc.manager.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.hlc.manager.util.BaseController;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class IndexController  extends BaseController {
 
     @RequestMapping("/home")
     private ModelAndView index(){
+        PageHelper.startPage(1,1);
         return new ModelAndView("home");
     }
 

@@ -1,8 +1,12 @@
 package com.hlc.manager.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
+import com.hlc.manager.entity.User;
 import com.hlc.manager.service.UserService;
 import com.hlc.manager.util.BaseController;
 import com.hlc.manager.util.JsonResult;
+import com.hlc.manager.util.PageResult;
 import com.hlc.manager.util.StringUtil;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.apache.shiro.SecurityUtils;
@@ -14,8 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @Author rjyx
@@ -56,5 +62,19 @@ public class UserController extends BaseController {
         } catch (ExcessiveAttemptsException eae) {
             return JsonResult.error("操作频繁，请稍后再试");
         }
+    }
+
+    @RequestMapping("/user/userlist")
+    @ResponseBody
+    public  ModelAndView findUserPageFromMybatis(HttpServletRequest request, Integer pageNum, Integer pageSize) {
+        pageNum = pageNum == null ? 1 : pageNum;
+        pageSize = pageSize == null ? 10 : pageSize;
+        PageHelper.startPage(pageNum, pageSize);
+        List<User> list = userService.getUsers();
+        PageResult<User> pageResult = new PageResult<>(list);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user",pageResult);
+        modelAndView.setViewName("userlist");
+        return modelAndView;
     }
 }

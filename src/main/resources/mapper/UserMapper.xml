@@ -2,7 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hlc.manager.mapper.UserMapper">
 
+
+    <resultMap id="BaseResultMap" type="com.hlc.manager.entity.User">
+        <id column="userId" jdbcType="INTEGER" property="userId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="nickName" jdbcType="VARCHAR" property="nickName" />
+        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+
+    </resultMap>
+
     <select id="findUserByName" resultType="com.hlc.manager.entity.User">
         select * from user where username=#{username}
+    </select>
+
+    <select id="getUsers"  resultMap="BaseResultMap">
+        select  user_id, username, password, nick_name, avatar, sex, phone, email, state from user
     </select>
 </mapper>

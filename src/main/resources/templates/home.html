@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -44,7 +44,7 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">文章管理</a>
+                    <a class="" th:href="@{newsManage_0_0_0}">文章管理</a>
                     <!--<dl class="layui-nav-child">-->
                         <!--<dd><a href="javascript:;">列表一</a></dd>-->
                         <!--<dd><a href="javascript:;">列表二</a></dd>-->
@@ -62,7 +62,7 @@
                 </li>
                 <li class="layui-nav-item"><a href="">余额管理</a></li>
                 <li class="layui-nav-item"><a href="">相册管理</a></li>
-                <li class="layui-nav-item"><a href="">用户管理</a></li>
+                <li class="layui-nav-item"><a class="" href="../userlist">用户管理</a></li>
                 <li class="layui-nav-item"><a href="">系统管理</a></li>
             </ul>
         </div>

@@ -3,6 +3,7 @@ package com.hlc.manager.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * 用户表
  */
 @TableName("sys_user")
+@Data
 public class User {
     @TableId
     private Integer userId;  // 主键id

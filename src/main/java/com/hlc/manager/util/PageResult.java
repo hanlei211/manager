@@ -1,11 +1,14 @@
 package com.hlc.manager.util;
 
+import lombok.Data;
+
 import java.util.List;
 
 /**
  * 分页结果对象,这里以layui框架的table为标准
  *
  */
+@Data
 public class PageResult<T> {
 
     private int code; //状态码, 0表示成功
