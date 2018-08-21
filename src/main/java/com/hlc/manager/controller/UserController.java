@@ -1,6 +1,7 @@
 package com.hlc.manager.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
 import com.hlc.manager.entity.User;
 import com.hlc.manager.service.UserService;
@@ -64,17 +65,14 @@ public class UserController extends BaseController {
         }
     }
 
-    @RequestMapping("/user/userlist")
+    @RequestMapping("/user/list")
     @ResponseBody
-    public  ModelAndView findUserPageFromMybatis(HttpServletRequest request, Integer pageNum, Integer pageSize) {
+    public  PageResult<User> findUser(Integer pageNum, Integer pageSize) {
         pageNum = pageNum == null ? 1 : pageNum;
         pageSize = pageSize == null ? 10 : pageSize;
         PageHelper.startPage(pageNum, pageSize);
         List<User> list = userService.getUsers();
         PageResult<User> pageResult = new PageResult<>(list);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user",pageResult);
-        modelAndView.setViewName("userlist");
-        return modelAndView;
+        return pageResult;
     }
 }
