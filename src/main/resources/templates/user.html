@@ -58,12 +58,12 @@
             cols: [[
                 {type: 'numbers'},
                 {field: 'username', sort: true, title: '账号'},
-                {field: 'nickName', sort: true, title: '用户名'},
+                {field: 'nick_name', sort: true, title: '用户名'},
                 {field: 'phone', sort: true, title: '手机号'},
                 {field: 'sex', sort: true, title: '性别'},
                 {
                     sort: true, templet: function (d) {
-                        return util.toDateString(d.createTime);
+                        return util.toDateString(d.create_time);
                     }, title: '创建时间'
                 },
                 {field: 'state', sort: true, templet: '#user-tpl-state', title: '状态'},
