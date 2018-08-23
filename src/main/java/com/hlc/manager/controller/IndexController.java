@@ -35,6 +35,12 @@ public class IndexController  extends BaseController {
         return new ModelAndView("login");
     }
 
+    @GetMapping("/index")
+    @ResponseBody
+    private ModelAndView index1(){
+        return new ModelAndView("index");
+    }
+
 
     /**
      * 图形验证码，用assets开头可以排除shiro拦截

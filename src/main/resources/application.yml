@@ -3,14 +3,24 @@ server:
 spring:
   profiles:
     active: http,jdbc,log,mail
-  thymeleaf:
-     prefix: classpath:/templates/
-     suffix: .html
-     mode: HTML5
-     encoding: UTF-8
-     servlet:
-        content-type: text/html
-     cache: false
+  freemarker:
+    allow-request-override: false
+    cache: true
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+    settings.template_update_delay: 0
+    settings.default_encoding: UTF-8
+    settings.url_escaping_charset: UTF-8
+    settings.classic_compatible: true
+    settings.number_format: ###
+    order: 1
+    request-context-attribute: ctx
   # springboot 之静态资源路径配置
   mvc:
     static-path-pattern: /**
