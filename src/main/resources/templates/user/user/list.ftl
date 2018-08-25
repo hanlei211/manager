@@ -77,7 +77,7 @@
     base: '${ctx.contextPath!""}/static/' //静态资源所在路径
   }).extend({
     index: 'lib/index' //主入口模块
-  }).use(['index', 'useradmin', 'table'], function(){
+  }).use(['list', 'user/user/list', 'table'], function(){
     var $ = layui.$
     ,form = layui.form
     ,table = layui.table;
