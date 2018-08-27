@@ -8,154 +8,148 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="${ctx.contextPath!''}/static/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="${ctx.contextPath!''}/static/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../../style/admin.css" media="all">
 </head>
 <body>
 
-  <div class="layui-fluid">
-    <div class="layui-card">
-      <div class="layui-form layui-card-header layuiadmin-card-header-auto">
-        <div class="layui-form-item">
-          <div class="layui-inline">
-            <label class="layui-form-label">ID</label>
-            <div class="layui-input-block">
-              <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-          <div class="layui-inline">
-            <label class="layui-form-label">用户名</label>
-            <div class="layui-input-block">
-              <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-          <div class="layui-inline">
-            <label class="layui-form-label">邮箱</label>
-            <div class="layui-input-block">
-              <input type="text" name="email" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-          <div class="layui-inline">
-            <label class="layui-form-label">性别</label>
-            <div class="layui-input-block">
-              <select name="sex">
-                <option value="0">不限</option>
-                <option value="1">男</option>
-                <option value="2">女</option>
-              </select>
-            </div>
-          </div>
-          <div class="layui-inline">
-            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-user-front-search">
-              <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+<div class="layui-card">
+
+    <div class="layui-card-body">
+        <div class="layui-form toolbar layui-input-inline" >
+            搜索：
+            <select id="user-search-key">
+                <option value="">-请选择-</option>
+                <option value="user_id">ID</option>
+                <option value="username">账号</option>
+                <option value="nick_name">用户名</option>
+                <option value="phone">手机号</option>
+            </select>&emsp;
+            <input id="user-search-value" class="layui-input search-input layui-input-inline" type="text" placeholder="输入关键字"/>&emsp;
+            <button id="user-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+            <button id="user-btn-add" class="layui-btn icon-btn" lay-tips="新用户密码为123456">
+                <i class="layui-icon">&#xe654;</i>添加
             </button>
-          </div>
         </div>
-      </div>
-      
-      <div class="layui-card-body">
-        <div style="padding-bottom: 10px;">
-          <button class="layui-btn layuiadmin-btn-useradmin" data-type="batchdel">删除</button>
-          <button class="layui-btn layuiadmin-btn-useradmin" data-type="add">添加</button>
-        </div>
-        
-        <table id="LAY-user-manage" lay-filter="LAY-user-manage"></table>
-        <script type="text/html" id="imgTpl"> 
-          <img style="display: inline-block; width: 50%; height: 100%;" src= "https://wx4.sinaimg.cn/mw1024/5db11ff4gy1fmx4keaw9pj20dw08caa4.jpg">
-        </script> 
-        <script type="text/html" id="table-useradmin-webuser">
-          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
-          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
-        </script>
-      </div>
+
+        <table  id="user-table" lay-filter="user-table"></table>
     </div>
-  </div>
+</div>
 
-  <script src="${ctx.contextPath!''}/static/layui/layui.js"></script>
-  <script>
-  layui.config({
-    base: '${ctx.contextPath!""}/static/' //静态资源所在路径
-  }).extend({
-    index: 'lib/index' //主入口模块
-  }).use(['list', 'user/user/list', 'table'], function(){
-    var $ = layui.$
-    ,form = layui.form
-    ,table = layui.table;
-    
-    //监听搜索
-    form.on('submit(LAY-user-front-search)', function(data){
-      var field = data.field;
-      
-      //执行重载
-      table.reload('LAY-user-manage', {
-        where: field
-      });
-    });
-  
-    //事件
-    var active = {
-      batchdel: function(){
-        var checkStatus = table.checkStatus('LAY-user-manage')
-        ,checkData = checkStatus.data; //得到选中的数据
+<!-- 表格操作列 -->
+<script type="text/html" id="user-table-bar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs" lay-event="reset">重置密码</a>
+</script>
 
-        if(checkData.length === 0){
-          return layer.msg('请选择数据');
-        }
-        
-        layer.prompt({
-          formType: 1
-          ,title: '敏感操作，请验证口令'
-        }, function(value, index){
-          layer.close(index);
-          
-          layer.confirm('确定删除吗？', function(index) {
-            
-            //执行 Ajax 后重载
-            /*
-            admin.req({
-              url: 'xxx'
-              //,……
-            });
-            */
-            table.reload('LAY-user-manage');
-            layer.msg('已删除');
-          });
+<!-- 表格状态列 -->
+<script type="text/html" id="user-tpl-state">
+    <input type="checkbox" lay-filter="user-tpl-state" value="{{d.userId}}" lay-skin="switch" lay-text="正常|锁定"
+           {{d.state==0?'checked':''}}/>
+</script>
+
+<script src="../../../layui/layui.js"></script>
+<script>
+    layui.use(['form', 'table', 'util', 'admin', 'element'], function () {
+        var form = layui.form;
+        var table = layui.table;
+        var layer = layui.layer;
+        var util = layui.util;
+        var admin = layui.admin;
+        var element = layui.element;
+
+        form.render('select');
+
+        // 渲染表格
+        table.render({
+            elem: '#user-table',
+            url: '/user/list',
+            page: true,
+            cols: [[
+                {type: 'numbers'},
+                {field: 'username', sort: true, title: '账号'},
+                {field: 'nick_name', sort: true, title: '用户名'},
+                {field: 'phone', sort: true, title: '手机号'},
+                {field: 'sex', sort: true, title: '性别'},
+                {
+                    sort: true, templet: function (d) {
+                        return util.toDateString(d.create_time);
+                    }, title: '创建时间'
+                },
+                {field: 'state', sort: true, templet: '#user-tpl-state', title: '状态'},
+                {align: 'center', toolbar: '#user-table-bar', title: '操作'}
+            ]]
         });
-      }
-      ,add: function(){
-        layer.open({
-          type: 2
-          ,title: '添加用户'
-          ,content: 'userform.html'
-          ,maxmin: true
-          ,area: ['500px', '450px']
-          ,btn: ['确定', '取消']
-          ,yes: function(index, layero){
-            var iframeWindow = window['layui-layer-iframe'+ index]
-            ,submitID = 'LAY-user-front-submit'
-            ,submit = layero.find('iframe').contents().find('#'+ submitID);
 
-            //监听提交
-            iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
-              var field = data.field; //获取提交的字段
-              
-              //提交 Ajax 成功后，静态更新表格中的数据
-              //$.ajax({});
-              table.reload('LAY-user-front-submit'); //数据刷新
-              layer.close(index); //关闭弹层
-            });  
-            
-            submit.trigger('click');
-          }
-        }); 
-      }
-    };
-    
-    $('.layui-btn.layuiadmin-btn-useradmin').on('click', function(){
-      var type = $(this).data('type');
-      active[type] ? active[type].call(this) : '';
+        // 添加按钮点击事件
+        $('#user-btn-add').click(function () {
+            showEditModel();
+        });
+
+        // 工具条点击事件
+        table.on('tool(user-table)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+
+            if (layEvent === 'edit') { // 修改
+                showEditModel(data);
+            } else if (layEvent === 'reset') { // 重置密码
+                layer.confirm('确定重置此用户的密码吗？', function (i) {
+                    layer.close(i);
+                    layer.load(2);
+                    $.post('system/user/restPsw', {
+                        userId: obj.data.userId
+                    }, function (data) {
+                        layer.closeAll('loading');
+                        if (data.code == 200) {
+                            layer.msg(data.msg, {icon: 1});
+                        } else {
+                            layer.msg(data.msg, {icon: 2});
+                        }
+                    });
+                });
+            }
+        });
+
+        // 显示表单弹窗
+        var showEditModel = function (data) {
+            var title = data ? '修改用户' : '添加用户';
+            admin.putTempData('t_user', data);
+            admin.popupCenter({
+                title: title,
+                path: 'system/user/editForm',
+                finish: function () {
+                    table.reload('user-table', {});
+                }
+            });
+        };
+
+        // 搜索按钮点击事件
+        $('#user-btn-search').click(function () {
+            var key = $('#user-search-key').val();
+            var value = $('#user-search-value').val();
+            table.reload('user-table', {where: {searchKey: key, searchValue: value}});
+        });
+
+        // 修改user状态
+        form.on('switch(user-tpl-state)', function (obj) {
+            layer.load(2);
+            $.post('system/user/updateState', {
+                userId: obj.elem.value,
+                state: obj.elem.checked ? 0 : 1
+            }, function (data) {
+                layer.closeAll('loading');
+                if (data.code == 200) {
+                    layer.msg(data.msg, {icon: 1});
+                    //table.reload('table-user', {});
+                } else {
+                    layer.msg(data.msg, {icon: 2});
+                    $(obj.elem).prop('checked', !obj.elem.checked);
+                    form.render('checkbox');
+                }
+            });
+        });
     });
-  });
-  </script>
+</script>
 </body>
 </html>
