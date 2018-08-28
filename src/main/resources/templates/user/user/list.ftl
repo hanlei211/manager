@@ -1,38 +1,56 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>hlc网站用户</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="../../../style/admin.css" media="all">
+    <meta charset="utf-8">
+    <title>hlc</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../style/admin.css" media="all">
 </head>
 <body>
-
-<div class="layui-card">
-
-    <div class="layui-card-body">
-        <div class="layui-form toolbar layui-input-inline" >
-            搜索：
-            <select id="user-search-key">
-                <option value="">-请选择-</option>
-                <option value="user_id">ID</option>
-                <option value="username">账号</option>
-                <option value="nick_name">用户名</option>
-                <option value="phone">手机号</option>
-            </select>&emsp;
-            <input id="user-search-value" class="layui-input search-input layui-input-inline" type="text" placeholder="输入关键字"/>&emsp;
-            <button id="user-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
-            <button id="user-btn-add" class="layui-btn icon-btn" lay-tips="新用户密码为123456">
-                <i class="layui-icon">&#xe654;</i>添加
-            </button>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">
+        <span class="layui-breadcrumb pull-right">
+          <a href="#!home_console">首页</a>
+          <a><cite>用户管理</cite></a>
+        </span>
         </div>
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">搜索:</label>
+                        <#--<div class="layui-input-inline">-->
+                            <#--<select id="user-search-key">-->
+                                <#--<option value="">-请选择-</option>-->
+                                <#--<option value="user_id">ID</option>-->
+                                <#--<option value="username">账号</option>-->
+                                <#--<option value="nick_name">用户名</option>-->
+                                <#--<option value="phone">手机号</option>-->
+                            <#--</select>-->
+                        <#--</div>-->
+                        <div class="layui-input-inline">
+                            <input id="user-search-value" class="layui-input search-input" type="text"
+                                   placeholder="输入关键字"/>
+                        </div>
+                    </div>
+                    <div class="layui-btn-group">
+                        <button id="user-btn-search" class="layui-btn icon-btn" data-type="reload"><i
+                                class="layui-icon">&#xe615;</i>搜索
+                        </button>
+                        <button id="user-btn-add" class="layui-btn icon-btn" lay-tips="新用户密码为123456"><i
+                                class="layui-icon">&#xe654;</i>添加
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-        <table  id="user-table" lay-filter="user-table"></table>
+            <table class="layui-table" id="user-table" lay-filter="user-table"></table>
+        </div>
     </div>
 </div>
 
@@ -49,6 +67,16 @@
 </script>
 
 <script src="../../../layui/layui.js"></script>
+<script src="../../../js/jquery-3.2.1.min.js"></script>
+
+
+<script>
+    layui.config({
+        base: '../../../' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use('index');
+</script>
 <script>
     layui.use(['form', 'table', 'util', 'admin', 'element'], function () {
         var form = layui.form;
@@ -126,9 +154,9 @@
 
         // 搜索按钮点击事件
         $('#user-btn-search').click(function () {
-            var key = $('#user-search-key').val();
             var value = $('#user-search-value').val();
-            table.reload('user-table', {where: {searchKey: key, searchValue: value}});
+            table.reload('user-table', {where:
+                        {username: value}});
         });
 
         // 修改user状态

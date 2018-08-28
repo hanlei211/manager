@@ -1,5 +1,6 @@
 package com.hlc.manager.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.hlc.manager.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,9 +13,9 @@ import java.util.List;
  * @Modify by
  */
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
 
     User findUserByName(String name);
 
-    List<User> getUsers();
+    List<User> getUsers(String name);
 }

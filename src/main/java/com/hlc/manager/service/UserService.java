@@ -1,6 +1,7 @@
 package com.hlc.manager.service;
 
 import com.hlc.manager.entity.User;
+import com.hlc.manager.util.PageResult;
 
 import java.util.List;
 
@@ -20,5 +21,5 @@ public interface UserService {
 
     User findUserByName(String name);
 
-    List<User> getUsers();
+    List<User> getUsers(String name);
 }

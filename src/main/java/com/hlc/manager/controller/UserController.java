@@ -69,11 +69,11 @@ public class UserController extends BaseController {
 
     @RequestMapping("/user/list")
     @ResponseBody
-    public  PageResult<User> findUser(Integer pageNum, Integer pageSize) {
+    public  PageResult<User> findUser(Integer pageNum, Integer pageSize,String userName) {
         pageNum = pageNum == null ? 1 : pageNum;
         pageSize = pageSize == null ? 10 : pageSize;
         PageHelper.startPage(pageNum, pageSize);
-        List<User> list = userService.getUsers();
+        List<User> list = userService.getUsers(userName);
         PageResult<User> pageResult = new PageResult<>(list);
         return pageResult;
     }
