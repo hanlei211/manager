@@ -109,6 +109,24 @@
                             </dd>
                         </dl>
                     </li>
+
+                    <li data-name="user" class="layui-nav-item">
+                        <a href="javascript:;" lay-tips="用户" lay-direction="2">
+                            <i class="layui-icon layui-icon-user"></i>
+                            <cite>系统管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a lay-href="user/index">用户管理</a>
+                            </dd>
+                            <dd>
+                                <a lay-href="user/administrators/list.html">角色管理</a>
+                            </dd>
+                            <dd>
+                                <a lay-href="user/administrators/role.html">权限管理</a>
+                            </dd>
+                        </dl>
+                    </li>
                     <li data-name="component" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="组件" lay-direction="2">
                             <i class="layui-icon layui-icon-component"></i>
@@ -356,23 +374,6 @@
                                     <dd><a lay-href="senior/echarts/bar.html">柱状图</a></dd>
                                     <dd><a lay-href="senior/echarts/map.html">地图</a></dd>
                                 </dl>
-                            </dd>
-                        </dl>
-                    </li>
-                    <li data-name="user" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="用户" lay-direction="2">
-                            <i class="layui-icon layui-icon-user"></i>
-                            <cite>用户</cite>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a lay-href="user/index">网站用户</a>
-                            </dd>
-                            <dd>
-                                <a lay-href="user/administrators/list.html">后台管理员</a>
-                            </dd>
-                            <dd>
-                                <a lay-href="user/administrators/role.html">角色管理</a>
                             </dd>
                         </dl>
                     </li>

@@ -1,8 +1,8 @@
 package com.hlc.manager.service;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.hlc.manager.entity.User;
 import com.hlc.manager.mapper.UserMapper;
-import com.hlc.manager.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +40,8 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public List<User> getUsers(String name) {
-        return userMapper.getUsers(name);
+        EntityWrapper ew = new EntityWrapper();
+        ew.like("username", name);
+        return userMapper.selectList(ew);
     }
 }

@@ -19,8 +19,6 @@
 
     <select id="getUsers"  parameterType="java.lang.String" resultMap="BaseResultMap">
         select  user_id, username, password, nick_name, avatar, sex, phone, email, state from user
-        <if test="name != null">
-        where username=#{name}
-        </if>
+       ${ew.sqlSegment}
     </select>
 </mapper>
